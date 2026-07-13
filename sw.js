@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gymstar-v6';
+const CACHE_NAME = 'gymstar-v7';
 const APP_SHELL = [
   './',
   './index.html',
