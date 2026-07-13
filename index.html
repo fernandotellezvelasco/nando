@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>NANDO FIT — Recomposición Corporal</title>
+<meta name="description" content="App de entrenamiento personalizada con rutinas dinámicas, seguimiento de progreso y cálculo de macros.">
+<meta name="theme-color" content="#05060a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0e1a'/%3E%3Cpath d='M9 21V11h2.5l7 7v-7H21v10h-2.5l-7-7v7H9z' fill='%2322d3ee'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" onerror="this.remove()">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div id="app" class="app">
+
+  <!-- Desktop sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark" aria-hidden="true"><i data-feather="cpu"></i></span>
+      <span class="brand-name">NANDO<span class="brand-accent">FIT</span></span>
+    </div>
+    <nav class="sidebar-nav" id="sidebar-nav">
+      <button class="nav-item active" data-view="dashboard"><i data-feather="home"></i><span>Dashboard</span></button>
+      <button class="nav-item" data-view="rutina"><i data-feather="activity"></i><span>Rutina</span></button>
+      <button class="nav-item" data-view="registro"><i data-feather="edit-3"></i><span>Registro</span></button>
+      <button class="nav-item" data-view="progreso"><i data-feather="trending-up"></i><span>Progreso</span></button>
+      <button class="nav-item" data-view="macros"><i data-feather="pie-chart"></i><span>Macros</span></button>
+      <button class="nav-item" data-view="logros"><i data-feather="award"></i><span>Logros</span></button>
+      <button class="nav-item" data-view="historial"><i data-feather="clock"></i><span>Historial</span></button>
+      <button class="nav-item" data-view="ajustes"><i data-feather="settings"></i><span>Ajustes</span></button>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="mini-profile" id="sidebar-mini-profile">
+        <div class="mini-avatar"><i data-feather="user"></i></div>
+        <div>
+          <p class="mini-name" id="sidebar-name">Atleta</p>
+          <p class="mini-sub" id="sidebar-phase">Fase 1</p>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile topbar -->
+  <header class="topbar">
+    <div class="topbar-brand">
+      <span class="brand-mark" aria-hidden="true"><i data-feather="cpu"></i></span>
+      <span class="brand-name">NANDO<span class="brand-accent">FIT</span></span>
+    </div>
+    <button class="icon-btn" id="topbar-settings-btn" aria-label="Ajustes"><i data-feather="settings"></i></button>
+  </header>
+
+  <main class="main-content">
+
+    <!-- DASHBOARD -->
+    <section id="view-dashboard" class="view active" data-view-name="dashboard">
+      <div class="view-header">
+        <div>
+          <h1 id="dash-greeting">Hola</h1>
+          <p class="view-subtitle" id="dash-date">—</p>
+        </div>
+      </div>
+
+      <div id="dash-reminder-banner" class="banner hidden"></div>
+
+      <div class="stat-grid" id="dash-stats"></div>
+
+      <div class="card" id="dash-today-card"></div>
+
+      <div class="section-block">
+        <div class="section-block-head">
+          <h2>Plan de la semana</h2>
+        </div>
+        <div class="week-strip" id="dash-week-strip"></div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-block-head">
+          <h2>Logros recientes</h2>
+          <button class="link-btn" data-view="logros">Ver todos <i data-feather="arrow-right"></i></button>
+        </div>
+        <div class="achv-strip" id="dash-achv-strip"></div>
+      </div>
+    </section>
+
+    <!-- RUTINA -->
+    <section id="view-rutina" class="view" data-view-name="rutina">
+      <div class="view-header">
+        <div>
+          <h1>Tu rutina</h1>
+          <p class="view-subtitle">Upper/Lower avanzado con rotación dinámica mensual</p>
+        </div>
+      </div>
+
+      <div class="card phase-card" id="rutina-phase-card"></div>
+
+      <div class="tabs" id="rutina-day-tabs"></div>
+      <div id="rutina-day-content"></div>
+
+      <div class="card info-card">
+        <div class="info-card-icon"><i data-feather="refresh-cw"></i></div>
+        <div>
+          <h3>Rotación automática de 4 fases</h3>
+          <p>Cada mes la app activa una fase distinta — cambia ejercicios, orden, volumen, intensidad, rango de repeticiones y técnicas avanzadas (biseries, rest-pause, superseries, drop sets). La progresión se sugiere en base a tus registros reales.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- REGISTRO -->
+    <section id="view-registro" class="view" data-view-name="registro">
+      <div class="view-header">
+        <div>
+          <h1>Registrar sesión</h1>
+          <p class="view-subtitle">Anota series, repeticiones, peso y RPE</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="form-row">
+          <div class="field">
+            <label for="reg-date">Fecha</label>
+            <input type="date" id="reg-date">
+          </div>
+          <div class="field">
+            <label for="reg-template">Plantilla del día</label>
+            <select id="reg-template"></select>
+          </div>
+        </div>
+      </div>
+
+      <form id="reg-form"></form>
+
+      <div class="reg-actions">
+        <button type="button" class="btn btn-ghost" id="reg-add-exercise"><i data-feather="plus"></i> Añadir ejercicio</button>
+        <button type="button" class="btn btn-primary" id="reg-save-btn"><i data-feather="check"></i> Guardar sesión</button>
+      </div>
+    </section>
+
+    <!-- PROGRESO -->
+    <section id="view-progreso" class="view" data-view-name="progreso">
+      <div class="view-header">
+        <div>
+          <h1>Progreso</h1>
+          <p class="view-subtitle">Evolución de fuerza, volumen y peso corporal</p>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="progreso-stats"></div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Evolución de carga por ejercicio</h3>
+          <select id="progreso-exercise-select"></select>
+        </div>
+        <div class="chart-box"><canvas id="chart-lift"></canvas></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Volumen semanal total</h3>
+          <div class="chart-box"><canvas id="chart-volume"></canvas></div>
+        </div>
+        <div class="card">
+          <h3>Consistencia (8 semanas)</h3>
+          <div class="chart-box"><canvas id="chart-consistency"></canvas></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Peso corporal</h3>
+          <button class="btn btn-ghost btn-sm" id="progreso-add-weight-btn"><i data-feather="plus"></i> Añadir peso</button>
+        </div>
+        <div class="chart-box"><canvas id="chart-bodyweight"></canvas></div>
+      </div>
+    </section>
+
+    <!-- MACROS -->
+    <section id="view-macros" class="view" data-view-name="macros">
+      <div class="view-header">
+        <div>
+          <h1>Macros y calorías</h1>
+          <p class="view-subtitle">Calculado para recomposición corporal</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <form id="macros-form" class="form-grid">
+          <div class="field">
+            <label for="macros-age">Edad</label>
+            <input type="number" id="macros-age" min="14" max="90" required>
+          </div>
+          <div class="field">
+            <label for="macros-sex">Sexo</label>
+            <select id="macros-sex">
+              <option value="male">Hombre</option>
+              <option value="female">Mujer</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="macros-height">Altura (cm)</label>
+            <input type="number" id="macros-height" min="120" max="230" required>
+          </div>
+          <div class="field">
+            <label for="macros-weight">Peso (kg)</label>
+            <input type="number" step="0.1" id="macros-weight" min="35" max="250" required>
+          </div>
+          <div class="field field-wide">
+            <label for="macros-activity">Nivel de actividad</label>
+            <select id="macros-activity"></select>
+          </div>
+          <div class="field field-wide">
+            <label for="macros-goal">Objetivo</label>
+            <select id="macros-goal"></select>
+          </div>
+          <button type="submit" class="btn btn-primary field-wide"><i data-feather="check"></i> Calcular y guardar</button>
+        </form>
+      </div>
+
+      <div class="grid-2" id="macros-results"></div>
+
+      <div class="card">
+        <h3>Distribución de macronutrientes</h3>
+        <div class="chart-box chart-box-donut"><canvas id="chart-macros"></canvas></div>
+      </div>
+    </section>
+
+    <!-- LOGROS -->
+    <section id="view-logros" class="view" data-view-name="logros">
+      <div class="view-header">
+        <div>
+          <h1>Logros</h1>
+          <p class="view-subtitle">Hitos desbloqueados por tu constancia</p>
+        </div>
+      </div>
+      <div class="achv-grid" id="logros-grid"></div>
+    </section>
+
+    <!-- HISTORIAL -->
+    <section id="view-historial" class="view" data-view-name="historial">
+      <div class="view-header">
+        <div>
+          <h1>Historial</h1>
+          <p class="view-subtitle">Todas tus sesiones registradas</p>
+        </div>
+      </div>
+      <div id="historial-list" class="history-list"></div>
+    </section>
+
+    <!-- AJUSTES -->
+    <section id="view-ajustes" class="view" data-view-name="ajustes">
+      <div class="view-header">
+        <div>
+          <h1>Ajustes</h1>
+          <p class="view-subtitle">Tu perfil, notificaciones y guía de uso</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Perfil</h3>
+        <form id="profile-form" class="form-grid">
+          <div class="field field-wide">
+            <label for="profile-name">Nombre</label>
+            <input type="text" id="profile-name" placeholder="Tu nombre">
+          </div>
+          <div class="field">
+            <label for="profile-height">Altura (cm)</label>
+            <input type="number" id="profile-height" min="120" max="230">
+          </div>
+          <div class="field">
+            <label for="profile-weight">Peso actual (kg)</label>
+            <input type="number" step="0.1" id="profile-weight" min="35" max="250">
+          </div>
+          <button type="submit" class="btn btn-primary field-wide"><i data-feather="check"></i> Guardar perfil</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h3>Notificaciones</h3>
+        <div class="switch-row">
+          <div>
+            <p class="switch-title">Recordatorios de sesión</p>
+            <p class="switch-sub">Avisa cuando toca entrenar y no has registrado nada</p>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="settings-notifications">
+            <span class="switch-slider"></span>
+          </label>
+        </div>
+        <div class="field" id="reminder-hour-field">
+          <label for="settings-reminder-hour">Hora del recordatorio</label>
+          <input type="range" id="settings-reminder-hour" min="6" max="22" step="1">
+          <p class="range-value" id="reminder-hour-value">18:00</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Guía rápida</h3>
+        <ol class="guide-list">
+          <li><strong>Rutina:</strong> revisa el entrenamiento del día — la fase activa rota automáticamente cada mes.</li>
+          <li><strong>Registro:</strong> al terminar cada sesión, anota series, repeticiones, peso y RPE por ejercicio.</li>
+          <li><strong>Progreso:</strong> consulta la evolución de tus levantamientos clave, el volumen semanal y tu peso corporal.</li>
+          <li><strong>Macros:</strong> ajusta tu objetivo calórico y de macronutrientes según cómo evoluciona tu recomposición.</li>
+          <li><strong>Logros:</strong> desbloquea hitos por constancia y nuevos récords personales.</li>
+        </ol>
+      </div>
+
+      <div class="card card-danger">
+        <h3>Zona de riesgo</h3>
+        <p class="switch-sub">Borra todo tu historial, perfil y progreso guardado en este dispositivo.</p>
+        <button class="btn btn-danger" id="reset-data-btn"><i data-feather="trash-2"></i> Reiniciar todos los datos</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Mobile bottom nav -->
+  <nav class="bottom-nav" id="bottom-nav">
+    <button class="bnav-item active" data-view="dashboard"><i data-feather="home"></i><span>Inicio</span></button>
+    <button class="bnav-item" data-view="rutina"><i data-feather="activity"></i><span>Rutina</span></button>
+    <button class="bnav-item bnav-cta" data-view="registro"><i data-feather="plus"></i></button>
+    <button class="bnav-item" data-view="progreso"><i data-feather="trending-up"></i><span>Progreso</span></button>
+    <button class="bnav-item" data-view="historial"><i data-feather="clock"></i><span>Historial</span></button>
+  </nav>
+
+</div>
+
+<!-- Onboarding modal -->
+<div class="modal-overlay hidden" id="onboarding-overlay">
+  <div class="modal onboarding-modal">
+    <div class="onboarding-head">
+      <span class="brand-mark brand-mark-lg"><i data-feather="cpu"></i></span>
+      <h2>Bienvenido a NANDO<span class="brand-accent">FIT</span></h2>
+      <p>Tu programa Upper/Lower avanzado con rutinas dinámicas que rotan cada mes. Configura tu perfil para empezar.</p>
+    </div>
+    <form id="onboarding-form" class="form-grid">
+      <div class="field field-wide">
+        <label for="ob-name">¿Cómo te llamas?</label>
+        <input type="text" id="ob-name" placeholder="Tu nombre" required>
+      </div>
+      <div class="field">
+        <label for="ob-height">Altura (cm)</label>
+        <input type="number" id="ob-height" value="185" min="120" max="230" required>
+      </div>
+      <div class="field">
+        <label for="ob-weight">Peso actual (kg)</label>
+        <input type="number" step="0.1" id="ob-weight" value="90" min="35" max="250" required>
+      </div>
+      <div class="field">
+        <label for="ob-age">Edad</label>
+        <input type="number" id="ob-age" value="28" min="14" max="90" required>
+      </div>
+      <div class="field">
+        <label for="ob-sex">Sexo</label>
+        <select id="ob-sex">
+          <option value="male">Hombre</option>
+          <option value="female">Mujer</option>
+        </select>
+      </div>
+      <div class="field field-wide">
+        <label for="ob-activity">Nivel de actividad</label>
+        <select id="ob-activity"></select>
+      </div>
+      <div class="field field-wide">
+        <label for="ob-goal">Objetivo</label>
+        <select id="ob-goal"></select>
+      </div>
+      <button type="submit" class="btn btn-primary field-wide"><i data-feather="arrow-right"></i> Empezar a entrenar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Add weight modal -->
+<div class="modal-overlay hidden" id="weight-modal-overlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Registrar peso corporal</h3>
+      <button class="icon-btn" data-close-modal="weight-modal-overlay"><i data-feather="x"></i></button>
+    </div>
+    <form id="weight-form" class="form-grid">
+      <div class="field">
+        <label for="weight-date">Fecha</label>
+        <input type="date" id="weight-date" required>
+      </div>
+      <div class="field">
+        <label for="weight-value">Peso (kg)</label>
+        <input type="number" step="0.1" id="weight-value" min="35" max="250" required>
+      </div>
+      <button type="submit" class="btn btn-primary field-wide"><i data-feather="check"></i> Guardar</button>
+    </form>
+  </div>
+</div>
+
+<!-- Achievement unlock toast/modal -->
+<div class="modal-overlay hidden" id="achievement-overlay">
+  <div class="modal achievement-modal" id="achievement-modal-content"></div>
+</div>
+
+<div id="toast-container" class="toast-container"></div>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script src="vendor/feather.min.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/data.js"></script>
+<script src="js/routines.js"></script>
+<script src="js/macros.js"></script>
+<script src="js/achievements.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/seed.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
