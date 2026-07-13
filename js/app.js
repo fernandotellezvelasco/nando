@@ -842,7 +842,7 @@ function boot() {
   checkReminder();
 }
 
-const SPLASH_MIN_MS = 550;
+const SPLASH_MIN_MS = 1400;
 const splashStart = performance.now();
 
 function hideSplash() {
