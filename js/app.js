@@ -308,11 +308,13 @@ function renderDayContent(phase, dayKey) {
   const day = phase.days[dayKey];
   const container = document.getElementById('rutina-day-content');
   const label = supersetLabel(phase);
+  const muscles = getDayMuscles(phase.id, dayKey);
 
   container.innerHTML = `
     <div class="card">
       <h3>${escapeHtml(day.title)}</h3>
       <p style="margin-bottom:16px">${escapeHtml(day.focus)}</p>
+      ${muscles.length ? BodyMap.render(muscles) : ''}
       ${day.blocks.map((block) => `
         <div class="day-block">
           ${block.length === 2 ? `<div class="block-label">${label}</div>` : ''}

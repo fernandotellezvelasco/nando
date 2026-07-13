@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gymstar-v8';
+const CACHE_NAME = 'gymstar-v9';
 const APP_SHELL = [
   './',
   './index.html',
@@ -10,6 +10,7 @@ const APP_SHELL = [
   './js/macros.js',
   './js/achievements.js',
   './js/charts.js',
+  './js/bodymap.js',
   './js/seed.js',
   './js/app.js',
   './vendor/chart.umd.min.js',

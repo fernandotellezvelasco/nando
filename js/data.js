@@ -307,3 +307,30 @@ const EXERCISE_ICONS = {
 function getExerciseIcon(name) {
   return EXERCISE_ICONS[name] || null;
 }
+
+// Which body-map zones light up for each phase/day combo (see js/bodymap.js for zone keys)
+const DAY_MUSCLES = {
+  '1-monday': ['quads', 'hamstrings', 'glutes', 'calves'],
+  '1-tuesday': ['chest', 'shoulders', 'triceps'],
+  '1-thursday': ['quads', 'hamstrings', 'glutes', 'abs'],
+  '1-friday': ['upperBack', 'lats', 'rearDelts', 'biceps'],
+
+  '2-monday': ['quads', 'hamstrings', 'glutes', 'calves'],
+  '2-tuesday': ['chest', 'shoulders', 'triceps'],
+  '2-thursday': ['glutes', 'hamstrings', 'abs'],
+  '2-friday': ['upperBack', 'lats', 'rearDelts', 'biceps'],
+
+  '3-monday': ['quads', 'glutes', 'calves'],
+  '3-tuesday': ['chest', 'shoulders', 'triceps'],
+  '3-thursday': ['glutes', 'hamstrings', 'abs'],
+  '3-friday': ['upperBack', 'lats', 'biceps'],
+
+  '4-monday': ['quads', 'hamstrings', 'calves'],
+  '4-tuesday': ['chest', 'shoulders', 'triceps'],
+  '4-thursday': ['glutes', 'hamstrings', 'abs'],
+  '4-friday': ['upperBack', 'lats', 'rearDelts', 'biceps'],
+};
+
+function getDayMuscles(phaseId, dayKey) {
+  return DAY_MUSCLES[`${phaseId}-${dayKey}`] || [];
+}

@@ -492,16 +492,16 @@ svg { width: 18px; height: 18px; }
   padding: 14px 16px;
   margin-bottom: 8px;
 }
-.exercise-card-head { display: flex; align-items: center; gap: 12px; }
+.exercise-card-head { display: flex; align-items: center; gap: 14px; }
 .exercise-icon {
   flex-shrink: 0;
-  width: 40px; height: 40px;
+  width: 68px; height: 68px;
   display: flex; align-items: center; justify-content: center;
-  background: rgba(255, 255, 255, 0.04);
+  background: linear-gradient(135deg, var(--cyan-soft), var(--violet-soft));
   border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
 }
-.exercise-icon img { width: 26px; height: 26px; object-fit: contain; }
+.exercise-icon img { width: 46px; height: 46px; object-fit: contain; }
 .exercise-card-body { flex: 1; min-width: 0; }
 .exercise-name { font-weight: 600; font-size: 0.92rem; }
 .exercise-meta { display: flex; gap: 14px; margin-top: 6px; font-size: 0.78rem; color: var(--text-tertiary); flex-wrap: wrap; }
@@ -528,6 +528,28 @@ svg { width: 18px; height: 18px; }
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
 .info-card p { font-size: 0.85rem; margin-top: 4px; }
+
+/* ---------- body map ---------- */
+
+.bodymap { margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--border-soft); }
+.bodymap-figures {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  padding: 12px 0 4px;
+}
+.bodymap-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.bodymap-svg { width: 88px; height: auto; }
+.bodymap-svg .zone { fill: rgba(255, 255, 255, 0.055); stroke: rgba(255, 255, 255, 0.1); stroke-width: 1; transition: fill 0.3s ease; }
+.bodymap-col:first-child .zone.active { fill: var(--cyan); fill-opacity: 0.85; }
+.bodymap-col:last-child .zone.active { fill: var(--violet); fill-opacity: 0.85; }
+.bodymap-view-label { font-size: 0.68rem; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.05em; }
+.bodymap-tags { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-top: 10px; }
+.bodymap-tag {
+  padding: 4px 10px; border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border);
+  font-size: 0.72rem; font-weight: 600; color: var(--text-secondary);
+}
 
 /* ---------- forms ---------- */
 
