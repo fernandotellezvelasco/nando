@@ -74,6 +74,7 @@ svg { width: 18px; height: 18px; }
 
 .app {
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
 }
 
@@ -178,8 +179,9 @@ svg { width: 18px; height: 18px; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--topbar-h);
-  padding: 0 16px;
+  flex-shrink: 0;
+  height: calc(var(--topbar-h) + env(safe-area-inset-top));
+  padding: env(safe-area-inset-top) 16px 0;
   position: sticky;
   top: 0;
   z-index: 20;

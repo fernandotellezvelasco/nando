@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gymstar-v3';
+const CACHE_NAME = 'gymstar-v4';
 const APP_SHELL = [
   './',
   './index.html',
@@ -39,18 +39,17 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
+  // Network-first: always prefer a fresh copy so fixes/updates land immediately.
+  // Falls back to cache only when offline.
   event.respondWith(
-    caches.match(event.request).then((cached) => {
-      const network = fetch(event.request)
-        .then((response) => {
-          if (response && response.ok && event.request.url.startsWith(self.location.origin)) {
-            const clone = response.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
-          }
-          return response;
-        })
-        .catch(() => cached);
-      return cached || network;
-    })
+    fetch(event.request)
+      .then((response) => {
+        if (response && response.ok && event.request.url.startsWith(self.location.origin)) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clone));
+        }
+        return response;
+      })
+      .catch(() => caches.match(event.request))
   );
 });
