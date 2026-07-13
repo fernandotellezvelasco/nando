@@ -1,4 +1,4 @@
-const CACHE_NAME = 'nandofit-v1';
+const CACHE_NAME = 'gymstar-v2';
 const APP_SHELL = [
   './',
   './index.html',

@@ -814,7 +814,7 @@ function checkReminder() {
   const meta = Storage.getMeta();
   if (meta.lastNotifiedDate === Storage.todayISO()) return;
 
-  new Notification('NANDO FIT', { body: `Hoy toca: ${workout.title}. No rompas tu racha.` });
+  new Notification('GYMstar', { body: `Hoy toca: ${workout.title}. No rompas tu racha.` });
   Storage.saveMeta({ ...meta, lastNotifiedDate: Storage.todayISO() });
 }
 

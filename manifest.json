@@ -1,6 +1,6 @@
 {
-  "name": "NANDO FIT — Recomposición Corporal",
-  "short_name": "NANDO FIT",
+  "name": "GYMstar — Recomposición Corporal",
+  "short_name": "GYMstar",
   "description": "App de entrenamiento personalizada con rutinas dinámicas, seguimiento de progreso y cálculo de macros.",
   "start_url": "./index.html",
   "scope": "./",

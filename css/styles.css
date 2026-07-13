@@ -128,6 +128,8 @@ svg { width: 18px; height: 18px; }
   color: var(--cyan);
 }
 .brand-mark-lg { width: 52px; height: 52px; border-radius: var(--radius-md); }
+.brand-mark svg { width: 20px; height: 20px; }
+.brand-mark-lg svg { width: 30px; height: 30px; }
 
 .brand-name { font-weight: 800; letter-spacing: -0.02em; font-size: 1.05rem; }
 .brand-accent { color: var(--cyan); }
