@@ -842,6 +842,19 @@ function boot() {
   checkReminder();
 }
 
+const SPLASH_MIN_MS = 550;
+const splashStart = performance.now();
+
+function hideSplash() {
+  const splash = document.getElementById('app-splash');
+  if (!splash) return;
+  const wait = Math.max(0, SPLASH_MIN_MS - (performance.now() - splashStart));
+  setTimeout(() => {
+    splash.classList.add('hidden');
+    setTimeout(() => splash.remove(), 450);
+  }, wait);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   refreshIcons();
   populateStaticSelects();
@@ -860,4 +873,5 @@ document.addEventListener('DOMContentLoaded', () => {
     Seed.run();
     boot();
   }
+  hideSplash();
 });

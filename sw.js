@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gymstar-v4';
+const CACHE_NAME = 'gymstar-v5';
 const APP_SHELL = [
   './',
   './index.html',
@@ -18,6 +18,13 @@ const APP_SHELL = [
   './icons/icon-192.png',
   './icons/icon-512.png',
   './icons/mark.png',
+  './icons/splash/splash-1284x2778.png',
+  './icons/splash/splash-1320x2868.png',
+  './icons/splash/splash-1206x2622.png',
+  './icons/splash/splash-1179x2556.png',
+  './icons/splash/splash-1170x2532.png',
+  './icons/splash/splash-828x1792.png',
+  './icons/splash/splash-750x1334.png',
 ];
 
 self.addEventListener('install', (event) => {
