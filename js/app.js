@@ -290,6 +290,12 @@ function supersetLabel(phase) {
   return 'PAREJA';
 }
 
+function exerciseIconHtml(exerciseName) {
+  const icon = getExerciseIcon(exerciseName);
+  if (!icon) return '';
+  return `<span class="exercise-icon"><img src="icons/exercises/${icon}.png" alt=""></span>`;
+}
+
 function progressionTagHtml(exerciseName) {
   const suggestion = Routines.getProgressionSuggestion(exerciseName);
   if (!suggestion) return '';
@@ -314,12 +320,15 @@ function renderDayContent(phase, dayKey) {
             ${i === 1 ? `<div class="superset-connector">+</div>` : ''}
             <div class="exercise-card">
               <div class="exercise-card-head">
-                <span class="exercise-name">${escapeHtml(exo.name)}</span>
-              </div>
-              <div class="exercise-meta">
-                <span><b>${exo.sets}</b> series</span>
-                <span>${repsMetaLabel(escapeHtml(exo.reps))}</span>
-                <span>RPE <b>${exo.rpe}</b></span>
+                ${exerciseIconHtml(exo.name)}
+                <div class="exercise-card-body">
+                  <span class="exercise-name">${escapeHtml(exo.name)}</span>
+                  <div class="exercise-meta">
+                    <span><b>${exo.sets}</b> series</span>
+                    <span>${repsMetaLabel(escapeHtml(exo.reps))}</span>
+                    <span>RPE <b>${exo.rpe}</b></span>
+                  </div>
+                </div>
               </div>
               ${exo.technique ? `<span class="technique-tag">${escapeHtml(exo.technique)}</span>` : ''}
               ${progressionTagHtml(exo.name)}

@@ -42,15 +42,21 @@
 
 * { box-sizing: border-box; }
 
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
   background:
     radial-gradient(1200px 600px at 100% -10%, rgba(167, 139, 250, 0.10), transparent 60%),
     radial-gradient(1000px 700px at -10% 0%, rgba(34, 211, 238, 0.08), transparent 55%),
     linear-gradient(180deg, var(--bg-grad-1) 0%, var(--bg-base) 55%, var(--bg-grad-2) 100%);
-  background-attachment: fixed;
   color: var(--text-primary);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -76,12 +82,14 @@ svg { width: 18px; height: 18px; }
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .main-content {
   flex: 1;
   min-width: 0;
-  padding: 20px 16px calc(var(--bottom-nav-h) + 28px);
+  padding: 20px 20px calc(var(--bottom-nav-h) + 28px);
   max-width: 1080px;
   margin: 0 auto;
   width: 100%;
@@ -484,9 +492,19 @@ svg { width: 18px; height: 18px; }
   padding: 14px 16px;
   margin-bottom: 8px;
 }
-.exercise-card-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.exercise-card-head { display: flex; align-items: center; gap: 12px; }
+.exercise-icon {
+  flex-shrink: 0;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.exercise-icon img { width: 26px; height: 26px; object-fit: contain; }
+.exercise-card-body { flex: 1; min-width: 0; }
 .exercise-name { font-weight: 600; font-size: 0.92rem; }
-.exercise-meta { display: flex; gap: 14px; margin-top: 8px; font-size: 0.78rem; color: var(--text-tertiary); }
+.exercise-meta { display: flex; gap: 14px; margin-top: 6px; font-size: 0.78rem; color: var(--text-tertiary); flex-wrap: wrap; }
 .exercise-meta b { color: var(--text-secondary); font-weight: 600; }
 .technique-tag {
   display: inline-block; margin-top: 8px;

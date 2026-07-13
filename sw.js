@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gymstar-v7';
+const CACHE_NAME = 'gymstar-v8';
 const APP_SHELL = [
   './',
   './index.html',
@@ -25,6 +25,20 @@ const APP_SHELL = [
   './icons/splash/splash-1170x2532.png',
   './icons/splash/splash-828x1792.png',
   './icons/splash/splash-750x1334.png',
+  './icons/exercises/squat.png',
+  './icons/exercises/hinge.png',
+  './icons/exercises/lunge.png',
+  './icons/exercises/hipthrust.png',
+  './icons/exercises/legmachine.png',
+  './icons/exercises/calf.png',
+  './icons/exercises/pushhoriz.png',
+  './icons/exercises/pushvert.png',
+  './icons/exercises/pullhoriz.png',
+  './icons/exercises/pullvert.png',
+  './icons/exercises/curl.png',
+  './icons/exercises/triceps.png',
+  './icons/exercises/core.png',
+  './icons/exercises/jump.png',
 ];
 
 self.addEventListener('install', (event) => {
