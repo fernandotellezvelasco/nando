@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gymstar-v2';
+const CACHE_NAME = 'gymstar-v3';
 const APP_SHELL = [
   './',
   './index.html',
@@ -17,6 +17,7 @@ const APP_SHELL = [
   './icons/apple-touch-icon.png',
   './icons/icon-192.png',
   './icons/icon-512.png',
+  './icons/mark.png',
 ];
 
 self.addEventListener('install', (event) => {
